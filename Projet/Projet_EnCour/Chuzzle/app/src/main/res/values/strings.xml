@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Chuzzle</string>
+    <string name="options">Options</string>
+    <string name="jouer">JOUER</string>
+    <string name="r_gles">Règles</string>
+    <string name="chuzzle">CHUZZLE</string>
+    <string name="sumzzle">SUMZZLE</string>
+    <string name="la_grille_charge">(La grille charge...)</string>
 </resources>
