@@ -9,18 +9,24 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
         android:text="@string/sumzzle"
         android:textColor="#EEEEEE"
         android:textSize="30sp"
         android:textStyle="bold" />
 
+    <com.example.chuzzle.ChuzzleView
+        android:id="@+id/grille_jeu"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:background="#333333" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="@string/la_grille_charge"
+        android:layout_marginTop="20dp"
+        android:text="Faites glisser les lignes ou colonnes"
         android:textColor="#AAAAAA"
-        android:textSize="16sp"
-        android:textStyle="italic" />
+        android:textSize="14sp" />
 
 </LinearLayout>
