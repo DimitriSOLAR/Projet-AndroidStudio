@@ -1,8 +1,17 @@
 # Rapport et informations importantes pour la SAE
 
-
 ### Prise de notes TZ
 
-**d**
+**Accès à tous**
 
-On peut déplacer un nombre illimité de cases.
+Pour que le jeu soit accesible à tous, il faut savoir distinguer les cases pas seulement avec les couleurs :
+
+- avec des formes
+
+- avec des icones
+
+- avec autre chose
+
+```bash
+A bannir, pas de mode daltonien (on les met pas à part) !
+```
