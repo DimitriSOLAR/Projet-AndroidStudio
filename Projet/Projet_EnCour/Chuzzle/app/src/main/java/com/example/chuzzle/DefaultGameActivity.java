@@ -2,58 +2,59 @@ package com.example.chuzzle;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.TextView;
 
-public class DefaultGameActivity extends Activity
-{
+public class DefaultGameActivity extends Activity {
 
     private ChuzzleView grille;
 
     @Override
-    protected void onCreate(Bundle etatSauvegarde)
-    {
+    protected void onCreate(Bundle etatSauvegarde) {
         super.onCreate(etatSauvegarde);
         setContentView(R.layout.activity_default_game);
 
+        // Liaison vue
         grille = findViewById(R.id.grille_jeu);
-        
+        TextView texteScore = findViewById(R.id.texte_score);
 
-        ChuzzleTouchListener ecouteurTouch = new ChuzzleTouchListener(grille);
+        // Initialisation
+        ChuzzleModel modeleDuJeu = new ChuzzleModel();
+        grille.setModele(modeleDuJeu);
+
+        ChuzzleTouchListener ecouteurTouch = new ChuzzleTouchListener(grille, texteScore);
         grille.setOnTouchListener(ecouteurTouch);
 
-
-        if (etatSauvegarde != null)
-        {
+        // Restauration de la sauvegarde
+        if (etatSauvegarde != null) {
             int[] donneesGrille = etatSauvegarde.getIntArray("grille_sauvegardee");
-            if (donneesGrille != null)
-            {
+            if (donneesGrille != null) {
                 ChuzzleModel modele = grille.getModele();
                 int index = 0;
-                for (int i = 0; i < ChuzzleModel.TAILLE; i++)
-                {
-                    for (int j = 0; j < ChuzzleModel.TAILLE; j++)
-                    {
-                        modele.setCouleur(i, j, donneesGrille[index++]);
+                for (int x = 0; x < ChuzzleModel.TAILLE; x++) {
+                    for (int y = 0; y < ChuzzleModel.TAILLE; y++) {
+                        modele.setCouleur(x, y, donneesGrille[index++]);
                     }
                 }
+                texteScore.setText("Score: " + modele.getScore());
             }
         }
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState)
-    {
+    protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        int[] donneesGrille = new int[ChuzzleModel.TAILLE * ChuzzleModel.TAILLE];
         ChuzzleModel modele = grille.getModele();
-        int index = 0;
-        for (int i = 0; i < ChuzzleModel.TAILLE; i++)
-        {
-            for (int j = 0; j < ChuzzleModel.TAILLE; j++)
-            {
-                donneesGrille[index++] = modele.getCouleur(i, j);
+
+        if (modele != null) {
+            int[] donneesGrille = new int[ChuzzleModel.TAILLE * ChuzzleModel.TAILLE];
+            int index = 0;
+            for (int x = 0; x < ChuzzleModel.TAILLE; x++) {
+                for (int y = 0; y < ChuzzleModel.TAILLE; y++) {
+                    donneesGrille[index++] = modele.getCase(x, y);
+                }
             }
+            outState.putIntArray("grille_sauvegardee", donneesGrille);
         }
-        outState.putIntArray("grille_sauvegardee", donneesGrille);
     }
 }

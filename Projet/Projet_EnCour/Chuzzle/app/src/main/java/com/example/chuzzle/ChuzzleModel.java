@@ -2,135 +2,147 @@ package com.example.chuzzle;
 
 import java.util.Random;
 
-public class ChuzzleModel
-{
+public class ChuzzleModel {
+
     public static final int TAILLE = 6;
-    private int[][] grille;
+    private int[][] grille; // [col][lig]
     private int nbCouleurs;
     private int score;
+    private Random generateurAleatoire;
 
-    public ChuzzleModel(int nbCouleurs)
-    {
+    public ChuzzleModel() {
+        this(7);
+    }
+
+    public ChuzzleModel(int nbCouleurs) {
         this.nbCouleurs = nbCouleurs;
         this.grille = new int[TAILLE][TAILLE];
         this.score = 0;
+        this.generateurAleatoire = new Random();
         this.initialiserGrille();
     }
 
-    public void initialiserGrille()
-    {
-        Random random = new Random();
-        for (int i = 0; i < TAILLE; i++)
-        {
-            for (int j = 0; j < TAILLE; j++)
-            {
-                this.grille[i][j] = random.nextInt(nbCouleurs);
+    public void initialiserGrille() {
+        for (int x = 0; x < TAILLE; x++) {
+            for (int y = 0; y < TAILLE; y++) {
+                int couleur;
+                do {
+                    couleur = generateurAleatoire.nextInt(nbCouleurs);
+                } while (
+                        (x >= 2 && this.grille[x-1][y] == couleur && this.grille[x-2][y] == couleur) ||
+                                (y >= 2 && this.grille[x][y-1] == couleur && this.grille[x][y-2] == couleur)
+                );
+                this.grille[x][y] = couleur;
             }
         }
     }
 
-    public int getCouleur(int ligne, int col)
-    {
-        return this.grille[ligne][col];
+    public int getCase(int x, int y) {
+        return this.grille[x][y];
     }
 
-    public void setCouleur(int ligne, int col, int valeur)
-    {
-        this.grille[ligne][col] = valeur;
+    public void setCouleur(int x, int y, int valeur) {
+        this.grille[x][y] = valeur;
     }
 
-    public int getScore()
-    {
+    public int getScore() {
         return this.score;
     }
-
-    public void glisserLigne(int ligne, int direction)
-    {
+    public void glisserLigne(int ligneY, int direction) {
         int[] temporaire = new int[TAILLE];
-        for (int j = 0; j < TAILLE; j++)
-        {
-            int nouvellePos = (j + direction) % TAILLE;
-            if (nouvellePos < 0)
-            {
-                nouvellePos += TAILLE;
+        for (int x = 0; x < TAILLE; x++) {
+            int nouvellePosX = (x + direction) % TAILLE;
+            if (nouvellePosX < 0) {
+                nouvellePosX += TAILLE;
             }
-            temporaire[nouvellePos] = this.grille[ligne][j];
+            temporaire[nouvellePosX] = this.grille[x][ligneY];
         }
-        this.grille[ligne] = temporaire;
-    }
-
-    public void glisserColonne(int col, int direction)
-    {
-        int[] temporaire = new int[TAILLE];
-        for (int i = 0; i < TAILLE; i++)
-        {
-            int nouvellePos = (i + direction) % TAILLE;
-            if (nouvellePos < 0)
-            {
-                nouvellePos += TAILLE;
-            }
-            temporaire[nouvellePos] = this.grille[i][col];
-        }
-        for (int i = 0; i < TAILLE; i++)
-        {
-            this.grille[i][col] = temporaire[i];
+        for (int x = 0; x < TAILLE; x++) {
+            this.grille[x][ligneY] = temporaire[x];
         }
     }
 
-    public boolean verifierMatch()
-    {
+    public void glisserColonne(int colonneX, int direction) {
+        int[] temporaire = new int[TAILLE];
+        for (int y = 0; y < TAILLE; y++) {
+            int nouvellePosY = (y + direction) % TAILLE;
+            if (nouvellePosY < 0) {
+                nouvellePosY += TAILLE;
+            }
+            temporaire[nouvellePosY] = this.grille[colonneX][y];
+        }
+        for (int y = 0; y < TAILLE; y++) {
+            this.grille[colonneX][y] = temporaire[y];
+        }
+    }
+    public boolean verifierMatch() {
         boolean trouve = false;
         boolean[][] aSupprimer = new boolean[TAILLE][TAILLE];
 
-        for (int i = 0; i < TAILLE; i++) {
-            for (int j = 0; j < TAILLE - 2; j++)
-            {
-                int couleur = this.grille[i][j];
-                if (couleur == this.grille[i][j+1] && couleur == this.grille[i][j+2])
-                {
-                    aSupprimer[i][j] = true;
-                    aSupprimer[i][j+1] = true;
-                    aSupprimer[i][j+2] = true;
+        // Vérification Horizontale
+        for (int y = 0; y < TAILLE; y++) {
+            for (int x = 0; x < TAILLE - 2; x++) {
+                int couleur = this.grille[x][y];
+                if (couleur != -1 && couleur == this.grille[x+1][y] && couleur == this.grille[x+2][y]) {
+                    aSupprimer[x][y] = true;
+                    aSupprimer[x+1][y] = true;
+                    aSupprimer[x+2][y] = true;
                     trouve = true;
                 }
             }
         }
 
-        for (int j = 0; j < TAILLE; j++)
-        {
-            for (int i = 0; i < TAILLE - 2; i++)
-            {
-                int couleur = this.grille[i][j];
-                if (couleur == this.grille[i+1][j] && couleur == this.grille[i+2][j])
-                {
-                    aSupprimer[i][j] = true;
-                    aSupprimer[i+1][j] = true;
-                    aSupprimer[i+2][j] = true;
+        // Vérification Verticale
+        for (int x = 0; x < TAILLE; x++) {
+            for (int y = 0; y < TAILLE - 2; y++) {
+                int couleur = this.grille[x][y];
+                if (couleur != -1 && couleur == this.grille[x][y+1] && couleur == this.grille[x][y+2]) {
+                    aSupprimer[x][y] = true;
+                    aSupprimer[x][y+1] = true;
+                    aSupprimer[x][y+2] = true;
                     trouve = true;
                 }
             }
         }
 
-        if (trouve)
-        {
+        if (trouve) {
             this.remplacerPions(aSupprimer);
         }
         return trouve;
     }
 
-    private void remplacerPions(boolean[][] masque)
-    {
-        Random random = new Random();
-        for (int i = 0; i < TAILLE; i++)
-        {
-            for (int j = 0; j < TAILLE; j++)
-            {
-                if (masque[i][j])
-                {
-                    this.grille[i][j] = random.nextInt(nbCouleurs);
-                    this.score += 10;
+    private void remplacerPions(boolean[][] masque) {
+
+        for (int x = 0; x < TAILLE; x++) {
+            for (int y = 0; y < TAILLE; y++) {
+                if (masque[x][y]) {
+                    this.grille[x][y] = -1;
+                    this.score += 8; // Score
                 }
             }
         }
+
+        for (int x = 0; x < TAILLE; x++) {
+
+            for (int y = TAILLE - 1; y >= 0; y--) {
+                if (this.grille[x][y] == -1) {
+                    for (int k = y - 1; k >= 0; k--) {
+                        if (this.grille[x][k] != -1) {
+                            this.grille[x][y] = this.grille[x][k];
+                            this.grille[x][k] = -1;
+                            break; // bouche-trou
+                        }
+                    }
+                }
+            }
+        }
+        for (int x = 0; x < TAILLE; x++) {
+            for (int y = 0; y < TAILLE; y++) {
+                if (this.grille[x][y] == -1) {
+                    this.grille[x][y] = generateurAleatoire.nextInt(nbCouleurs);
+                }
+            }
+        }
+        this.verifierMatch();
     }
 }
