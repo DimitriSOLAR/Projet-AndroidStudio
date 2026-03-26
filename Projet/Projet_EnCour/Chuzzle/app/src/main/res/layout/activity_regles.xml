@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="30dp"
-        android:text="Règles du jeu"
+        android:text="@string/regles_jeu"
         android:textColor="#EEEEEE"
         android:textSize="30sp"
         android:textStyle="bold" />
@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Principe de Chuzzle :"
+        android:text="@string/principe_chuzzle"
         android:textColor="#EEEEEE"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -32,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Faites glisser les lignes ou les colonnes pour aligner au moins 3 éléments de la même couleur.\n\nAttention : un mouvement n'est permis que s'il crée une série, sinon la grille revient à son état d'origine !"
+        android:text="@string/chuzzle_description"
         android:textColor="#EEEEEE"
         android:textSize="16sp" />
 
@@ -42,6 +42,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
-        android:text="Compris ?" />
+        android:text="@string/compris" />
 
 </LinearLayout>

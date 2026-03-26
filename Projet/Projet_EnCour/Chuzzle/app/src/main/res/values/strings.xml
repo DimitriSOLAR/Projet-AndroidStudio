@@ -2,8 +2,20 @@
     <string name="app_name">Chuzzle</string>
     <string name="options">Options</string>
     <string name="jouer">JOUER</string>
-    <string name="r_gles">Règles</string>
+    <string name="regles">Règles</string>
     <string name="chuzzle">CHUZZLE</string>
     <string name="sumzzle">SUMZZLE</string>
     <string name="la_grille_charge">(La grille charge...)</string>
+    <string name="glisser_ligne">Faites glisser les lignes ou colonnes</string>
+    <string name="option">Options</string>
+    <string name="hard_mode">Hard Mode </string>
+    <string name="hard_mode_description">Le mode difficile accélère l'apparition des verrous sur la grille de jeu.</string>
+    <string name="regles_jeu">Règles du jeu</string>
+    <string name="principe_chuzzle">Principe de Chuzzle :</string>
+    <string name="chuzzle_description">
+        Faites glisser les lignes ou les colonnes pour aligner au moins 3 éléments de la même
+        couleur.\n\nAttention : un mouvement n'est permis que s'il crée une série, sinon la grille
+        revient à son état d'origine !
+    </string>
+    <string name="compris">Compris ?</string>
 </resources>

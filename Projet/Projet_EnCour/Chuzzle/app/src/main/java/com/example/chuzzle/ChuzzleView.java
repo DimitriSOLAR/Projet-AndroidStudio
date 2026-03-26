@@ -42,7 +42,7 @@ public class ChuzzleView extends View {
 
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 6; j++) {
-
+                boolean isVerrou = false;
                 float centreX = (i * tailleCase) + (tailleCase / 2f);
                 float centreY = (j * tailleCase) + (tailleCase / 2f);
 
@@ -50,6 +50,11 @@ public class ChuzzleView extends View {
 
                 pinceau.setStyle(Paint.Style.FILL);
                 pinceau.setStrokeWidth(0);
+                if(typeCase >9 ){
+                    isVerrou = true;
+                    typeCase = typeCase-10;
+                    
+                }
 
                 switch (typeCase) {
                     case 0:

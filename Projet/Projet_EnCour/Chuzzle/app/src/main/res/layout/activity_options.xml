@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:text="Options"
+        android:text="@string/option"
         android:textColor="#EEEEEE"
         android:textSize="40dp"/>
 
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
-        android:text="Hard Mode "
+        android:text="@string/hard_mode"
         android:textColor="#EEEEEE"
         android:textSize="20dp"/>
 
@@ -30,7 +30,7 @@
         android:layout_marginLeft="40dp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="40dp"
-        android:text="Le mode difficile accélère l'apparition des verrous sur la grille de jeu."
+        android:text="@string/hard_mode_description"
         android:textColor="#AAAAAA"
         android:textSize="16dp"/>
 

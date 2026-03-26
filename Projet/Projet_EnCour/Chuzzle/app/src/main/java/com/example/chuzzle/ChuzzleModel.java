@@ -5,10 +5,13 @@ import java.util.Random;
 public class ChuzzleModel {
 
     public static final int TAILLE = 6;
+
+    private int chanceVerrou = 10;
     private int[][] grille; // [col][lig]
     private int nbCouleurs;
     private int score;
     private Random generateurAleatoire;
+
 
     public ChuzzleModel() {
         this(7);
@@ -39,6 +42,13 @@ public class ChuzzleModel {
 
     public int getCase(int x, int y) {
         return this.grille[x][y];
+    }
+
+    public void addVerrou(int x, int y){
+        /*on ajoute 10 au nombre pour indiquer un verrou*/
+        if (this.grille[x][y] < 10 && this.grille[x][y] != -1) {
+            this.grille[x][y] +=10;
+        }
     }
 
     public void setCouleur(int x, int y, int valeur) {
@@ -140,9 +150,14 @@ public class ChuzzleModel {
             for (int y = 0; y < TAILLE; y++) {
                 if (this.grille[x][y] == -1) {
                     this.grille[x][y] = generateurAleatoire.nextInt(nbCouleurs);
+                    if (this.generateurAleatoire.nextInt(100) <= this.chanceVerrou){
+                        addVerrou(this.generateurAleatoire(TAILLE),this.generateurAleatoire(TAILLE));
+                    }
+
                 }
             }
         }
+
         this.verifierMatch();
     }
 }

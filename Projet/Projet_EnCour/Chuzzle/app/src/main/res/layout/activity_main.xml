@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="#222222"
         android:layout_marginBottom="10dp"
-        android:text="@string/r_gles" />
+        android:text="@string/regles" />
 
     <Button
         android:id="@+id/bouton_options"
