@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_game"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#222222"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/titre_jeu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="@string/sumzzle"
+        android:textColor="#EEEEEE"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/texte_seed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="Seed: -"
+        android:textColor="#AAAAAA"
+        android:textSize="14sp"
+        android:visibility="gone" />
+
+    <com.example.chuzzle.ChuzzleView
+        android:id="@+id/grille_jeu"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:background="#333333" />
+
+    <TextView
+        android:id="@+id/description_jeu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/glisser_ligne"
+        android:textColor="#AAAAAA"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/texte_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="Score: 0"
+        android:textColor="#FFFFFF"
+        android:textSize="12dp"
+        android:textStyle="italic" />
+
+    <Button
+        android:id="@+id/bouton_fermer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Retour au menu" />
+
+</LinearLayout>
